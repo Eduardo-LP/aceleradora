@@ -1,7 +1,6 @@
 #________inicializar sistema__________
 print("Bem-Vindo(a) ao sistema da biblioteca")
 nomeUsuario = str(input("Digite o seu nome completo: "))
-print("=-"*14)
 
 #_________inserindo classes____________
 class Livro:
@@ -24,6 +23,7 @@ def menuIniciar():
     op = 0
 
     while op != 4:
+        print('\n')
         print('''---Menu de entrada---
     [1] Retirar um livro
     [2] Devolver um livro
@@ -34,13 +34,15 @@ def menuIniciar():
         return op
 
 def menulivros():
+    print('\n')
     mostraLivros = len(livros)
 
     for x in range(0,mostraLivros):
         print(f'[{x + 1}] {livros[x].titulo}')
     return int(input('Selecione 0 para voltar ou o numero do livro desejado: '))
 
-def menuDevolveLivros():
+def menuDevolveLivro():
+    print('\n')
     mostraLivros = len(livros)
 
     for x in range(0,mostraLivros):
@@ -48,8 +50,8 @@ def menuDevolveLivros():
             print(f'[{x + 1}] {livros[x].titulo}')
     return int(input('Selecione 0 para voltar ou o numero do livro desejado: '))
 
-
 def constroiLivro(nume):
+    print('\n')
     print(f'''----Livro selecionado----
     Numero: {livros[nume].numero}
     Titulo: {livros[nume].titulo}    
@@ -72,11 +74,11 @@ while online == True:
             print('Bem-Vindo(a) de volta ao menu iniciar')
         elif escolha > 0 and escolha <= mostraLivros:
             constroiLivro(escolha - 1)
-            if livros[escolha].emprestado == '':
-                pega = int(input('Digite 0 para retirar e 1 para voltar ao menu principal: '))
-                if pega == 0:
+            if livros[escolha - 1].emprestado == '':
+                pega = int(input('Digite 0 para voltar ao menu principal e 1 para retirar: '))
+                if pega == 1:
                     print('Obrigado pela escolha. Tenha uma boa leitura :).')
-                    livros[escolha].addEmprestado(nomeUsuario)
+                    livros[escolha - 1].addEmprestado(nomeUsuario)
                 else:
                     print('Bem-Vindo(a) de volta ao menu iniciar')
             else:
@@ -86,23 +88,23 @@ while online == True:
             print('Bem-Vindo(a) de volta ao menu iniciar')
                 
     elif op == 2:
-        escolha = menuDevolveLivros()
+        escolha = menuDevolveLivro()
 
         mostraLivros = len(livros)
 
         if escolha == 0:
             print('Bem-Vindo(a) de volta ao menu iniciar')
         elif escolha > 0 and escolha <= mostraLivros:
-            if livros[escolha].emprestado != '':
+            if livros[escolha - 1].emprestado != '':
                 constroiLivro(escolha - 1)
-                devolve = int(input('Digite 0 para confirmar e 1 para voltar ao menu principal: '))
-                if devolve == 0:
-                    print('Obrigado pela escolha :). Fique a vontade para escolher outros livros.')
-                    livros[escolha].addEmprestado('')
+                pega = int(input('Digite 0 para voltar ao menu principal e 1 confirmar: '))
+                if pega == 1:
+                    print('Devolução concluida :). Confira os outros livros disponiveis na biblioteca.')
+                    livros[escolha - 1].addEmprestado('')
                 else:
                     print('Bem-Vindo(a) de volta ao menu iniciar')
             else:
-                print('Este livro esta disponível para retirada')
+                print('Livro não encontrado...')
         else:
             print('Livro não encontrado.....')
             print('Bem-Vindo(a) de volta ao menu iniciar')
