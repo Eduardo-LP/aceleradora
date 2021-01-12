@@ -62,9 +62,21 @@ def constroiLivro(nume):
 
 def addLivro():
     number = len(livros) + 1
-    tittle = str(input("Digite o nome do livro: "))
-    dono = str(input("Digite o autor do livro: "))
-    idade = int(input("Digite o ano de publicação do livro: "))
+
+    escolha = 0
+    while escolha == 0:
+        tittle = str(input("Digite o nome do livro: "))
+        dono = str(input("Digite o autor do livro: "))
+        idade = int(input("Digite o ano de publicação do livro: "))
+
+        print(f'''----Livro a ser doado----
+    Numero: {number}
+    Titulo: {tittle}    
+    Autor: {dono}
+    Ano: {idade}''')
+        dados = int(input('Digite 0 para alterar os dados e 1 para salvar: '))
+        if dados == 1:
+            escolha = 1
 
     livros.append(Livro(number, tittle, dono, idade, 'Disponível'))
     return
