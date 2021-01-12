@@ -15,6 +15,12 @@ class Livro:
     def addEmprestado(self, usuario):
         self.emprestado = usuario
 
+    def statusDis(self):
+        self.status = 'Disponível'
+
+    def statusInds(self):
+        self.status = 'Indisponível'
+
 #_________Definindo livros primarios_________
 livros = [Livro(1, 'Código Limpo', 'Tio Bob', 2001, 'Disponível'), Livro(2, 'Como fazer sentido e bater o martelo? ', 'Alexandro Aolchique', 2017, 'Disponível'), Livro(3, 'Basquete 101', 'Hortência Marcari', 2010, 'Disponível')]
 
@@ -45,10 +51,17 @@ def menuDevolveLivro():
     print('\n')
     mostraLivros = len(livros)
 
+    temlivro = False
+
     for x in range(0,mostraLivros):
-        if livros[x].emprestado != '':
+        if livros[x].emprestado != '' and livros[x].emprestado == nomeUsuario:
             print(f'[{x + 1}] {livros[x].titulo}')
-    return int(input('Selecione 0 para voltar ou o numero do livro desejado: '))
+            temlivro = True
+
+    if temlivro:
+        return int(input('Selecione 0 para voltar ou o numero do livro desejado: '))
+    else:
+        return 0
 
 def constroiLivro(nume):
     print('\n')
@@ -101,6 +114,7 @@ while online == True:
                 if pega == 1:
                     print('Obrigado pela escolha. Tenha uma boa leitura :).')
                     livros[escolha - 1].addEmprestado(nomeUsuario)
+                    livros[escolha - 1].statusInds()
                 else:
                     print('Bem-Vindo(a) de volta ao menu iniciar')
             else:
@@ -123,6 +137,7 @@ while online == True:
                 if pega == 1:
                     print('Devolução concluida :). Confira os outros livros disponiveis na biblioteca.')
                     livros[escolha - 1].addEmprestado('')
+                    livros[escolha - 1].statusDis()
                 else:
                     print('Bem-Vindo(a) de volta ao menu iniciar')
             else:
