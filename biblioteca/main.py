@@ -60,6 +60,16 @@ def constroiLivro(nume):
     Status: {livros[nume].status}
     Emprestado para: {livros[nume].emprestado}''')
 
+def addLivro():
+    number = len(livros) + 1
+    tittle = str(input("Digite o nome do livro: "))
+    dono = str(input("Digite o autor do livro: "))
+    idade = int(input("Digite o ano de publicação do livro: "))
+
+    livros.append(Livro(number, tittle, dono, idade, 'Disponível'))
+    return
+
+
 #_________rodando o sistema da biblioteca_________
 online = True
 
@@ -110,7 +120,14 @@ while online == True:
             print('Bem-Vindo(a) de volta ao menu iniciar')
 
     elif op == 3:
-        print("op = 3")
+        escolha = int(input("Digite 0 para voltar e 1 para continuar: "))
+        if escolha == 0:
+            print('Bem-Vindo(a) de volta ao menu iniciar')
+        elif escolha == 1:
+            addLivro()
+            print('Livro adicionado ao sistema. Obrigado pela doação :).')
+        else:
+            print("Opção não encontrada...")
     elif op == 4:
         online = False
         print("Finalizando o programa...")
