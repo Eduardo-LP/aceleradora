@@ -51,22 +51,16 @@ def menuDevolveLivro():
     print('\n')
     mostraLivros = len(livros)
 
-    temlivro = False
-
     for x in range(0,mostraLivros):
-        if livros[x].emprestado != '' and livros[x].emprestado == nomeUsuario:
+        if livros[x].emprestado != '':
             print(f'[{x + 1}] {livros[x].titulo}')
-            temlivro = True
-
-    if temlivro:
-        return int(input('Selecione 0 para voltar ou o numero do livro desejado: '))
-    else:
-        return 0
+ 
+    return int(input('Selecione 0 para voltar ou o numero do livro desejado: '))
 
 def constroiLivro(nume):
     print('\n')
     print(f'''----Livro selecionado----
-    Numero: {livros[nume].numero}
+    Numero: {livros[nume].numero:0>5}
     Titulo: {livros[nume].titulo}    
     Autor: {livros[nume].autor}
     Ano: {livros[nume].ano}
@@ -83,7 +77,7 @@ def addLivro():
         idade = int(input("Digite o ano de publicação do livro: "))
 
         print(f'''----Livro a ser doado----
-    Numero: {number}
+    Numero: {number:0>5}
     Titulo: {tittle}    
     Autor: {dono}
     Ano: {idade}''')
